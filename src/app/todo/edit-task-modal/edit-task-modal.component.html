@@ -1,0 +1,17 @@
+<!-- edit-task-modal.component.html -->
+<h2 mat-dialog-title>Edit Task</h2>
+
+<mat-dialog-content>
+  <form (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput required [(ngModel)]="task.title" name="taskTitle">
+    </mat-form-field>
+    <mat-checkbox [(ngModel)]="task.isDone" name="isTaskDone">Completed</mat-checkbox>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button color="primary" type="submit" (click)="onSubmit()">Save</button>
+</mat-dialog-actions>

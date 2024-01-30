@@ -1,0 +1,25 @@
+a i {
+  -webkit-border-radius: 50%;
+
+  border-radius: 50%;
+  color: #fff;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  width: 30px;
+  font-size: 12px;
+}
+
+.fa-trash {
+background-color: rgba(139, 34, 34, 0.85);
+}
+
+.fa-pencil-alt {
+  background-color: rgba(32, 126, 68, 0.85);
+}
+
+.container {
+  max-width: 800px;
+  /* Ancho máximo del contenedor */
+}

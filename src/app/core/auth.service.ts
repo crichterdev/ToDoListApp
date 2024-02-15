@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
-import { AuthenticationResponse } from '../shared/models/authentication-response';
+import { AuthenticationResponse } from './models/authentication-response';
 
 @Injectable({
   providedIn: 'root',

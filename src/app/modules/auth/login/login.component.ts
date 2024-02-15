@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../core/auth.service';
-import { AuthenticationResponse } from 'src/app/shared/models/authentication-response';
+
+import { AuthenticationResponse } from 'src/app/core/models/authentication-response';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/auth.service';
 
 
 @Component({

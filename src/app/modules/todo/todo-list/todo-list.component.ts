@@ -2,12 +2,13 @@ import { ChangeDetectionStrategy } from '@angular/core';
 // todo-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../todo.service';
-import { Task } from 'src/app/shared/models/Task';
-import { Router } from '@angular/router';
+import { Task } from 'src/app/core/models/Task';
+import { Router, RouterStateSnapshot } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTaskModalComponent } from '../add-task-modal/add-task-modal.component';
 import { EditTaskModalComponent } from '../edit-task-modal/edit-task-modal.component';
 import { DeleteTaskModalComponent } from '../delete-task-modal/delete-task-modal.component';
+import { catchError, tap, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-todo-list',
@@ -27,7 +28,8 @@ export class TodoListComponent implements OnInit {
     // When initializing the component, load the tasks
     this.loadTasks();
     this.router.events.subscribe((event) => {
-      if (event instanceof PopStateEvent) {
+      if (event instanceof
+        RouterStateSnapshot) {
         // Here you can perform redirection logic
         sessionStorage.removeItem('jwtToken');
         this.handleBackButton();
@@ -36,15 +38,17 @@ export class TodoListComponent implements OnInit {
   }
 
   loadTasks(): void {
-    // Call the service to get all tasks
-    this.todoService.getTasks().subscribe(
-      (tasks) => {
-        this.tasks = tasks;
-      },
-      (error) => {
-        console.error('Error loading tasks:', error);
-      }
-    );
+    this.todoService.getTasks()
+      .pipe(
+        tap((tasks) => {
+          this.tasks = tasks;
+        }),
+        catchError((error) => {
+          console.error('Error loading tasks:', error);
+          return throwError(error);
+        })
+      )
+      .subscribe();
   }
 
   openAddTaskModal(): void {

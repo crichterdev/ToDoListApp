@@ -11,12 +11,12 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.authService.isLoggedIn.subscribe((loggedIn) => {
-      if (loggedIn) {
-        this.router.navigate(['/todo-list']);
-      } else {
-        this.router.navigate(['/login']);
-      }
-    });
+    const destination = this.authService.isLoggedInValue ? '/todo-list' : '/login';
+  this.router.navigateByUrl(destination);
+
+  this.authService.isLoggedIn.subscribe((loggedIn) => {
+    const destination = loggedIn ? '/todo-list' : '/login';
+    this.router.navigateByUrl(destination);
+  });
   }
 }

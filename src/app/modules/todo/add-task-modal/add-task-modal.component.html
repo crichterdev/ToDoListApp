@@ -1,0 +1,36 @@
+
+<h2 mat-dialog-title>Add a task to your list</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="taskTitle">
+      <mat-error *ngIf="addForm.touched && addForm.get('taskTitle')?.hasError('required')">
+        Title is required
+      </mat-error>
+
+      <mat-error *ngIf="addForm.touched && addForm.get('taskTitle')?.hasError('minlength')">
+        Title must be at least 4 characters long
+      </mat-error>
+    </mat-form-field>
+
+    <mat-error *ngIf="addForm.invalid && addForm.get('taskTitle')?.hasError('required')">
+      Title is required
+    </mat-error>
+
+    <mat-error *ngIf="addForm.invalid && addForm.get('taskTitle')?.hasError('minlength')">
+      Title must be at least 4 characters long
+    </mat-error>
+    <!-- <mat-error *ngIf="addForm.invalid && (addForm.dirty || addForm.touched)">
+
+      Please fill out the required fields.
+
+    </mat-error> -->
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button  #cancelButton mat-button (click)="onCancel()"autofocus>Cancel</button>
+  <button mat-button color="primary" type="submit" [mat-dialog-close] [disabled]="addForm.invalid" (click)="onSubmit()">Save</button>
+</mat-dialog-actions>
